@@ -8,7 +8,7 @@ boolean dIsPressed = false;
 boolean hyperspace = false;
 public void setup()
 {
-  gooner = new ArrayList<>();
+  gooner = new ArrayList<Asteroids>();
   size(500,500);
   for(int i = 0; i < stars.length; i++){
     stars[i] = new Star();
@@ -42,23 +42,24 @@ public void draw()
   }
   goon.show();
   goon.move();
-  for(int j = 0; j < gooner.size(); j++){
   boolean yes = false;
-  if(dist((float)(gooner.get(j).myCenterX), (float)(gooner.get(j).myCenterY), (float)(goon.myCenterX), (float)(goon.myCenterY)) <= 10){
-    gooner.remove(j);
-  }
+   
+  for(int j = gooner.size()-1; j >=0; j--){
+  //boolean yes = false;
   if((int)(Math.random()*2)==1){
-    yes = true;
+     yes = true;
   }
   if(yes == true){
-    gooner.get(j).setRotateSpeed((double)(Math.random()*5)-10);
+   gooner.get(j).setRotateSpeed((double)(Math.random()*5)-10);
   }
-   if(yes == false){
-   gooner.get(j).setRotateSpeed((double)(Math.random()*5)+10);
+  if(yes == false){
+  gooner.get(j).setRotateSpeed((double)(Math.random()*5)+10);
    }
   gooner.get(j).show();
   gooner.get(j).move();
-//gooner.get(j).accelerate();
+  if(dist((float)(gooner.get(j).myCenterX), (float)(gooner.get(j).myCenterY), (float)(goon.myCenterX), (float)(goon.myCenterY)) <= 10){
+    gooner.remove(j);
+  }
   }
 }
  //write key pressed here
