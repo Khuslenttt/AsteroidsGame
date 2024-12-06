@@ -1,5 +1,5 @@
 class Asteroids extends Floater{
-  double rotateSpeed;
+  private double rotateSpeed;
   public Asteroids(){
    myColor = color(255);
    corners = 6;
