@@ -1,6 +1,7 @@
-ArrayList<Asteroids> gooner; 
+ArrayList<Asteroids> gooner;
 Spaceship goon;
 Star [] stars = new Star[190];
+ArrayList<Bullet> shooter;
 boolean wIsPressed = false;
 boolean aIsPressed = false;
 boolean sIsPressed = false;
@@ -8,6 +9,7 @@ boolean dIsPressed = false;
 boolean hyperspace = false;
 public void setup()
 {
+  shooter = new ArrayList<Bullet>();
   gooner = new ArrayList<Asteroids>();
   size(500,500);
   for(int i = 0; i < stars.length; i++){
@@ -16,8 +18,9 @@ public void setup()
    }
    for(int j = 0; j < 10; j++){
     gooner.add(new Asteroids());
+    }
   }
-}
+
 public void draw()
 {
   background(0);
@@ -61,6 +64,17 @@ public void draw()
     gooner.remove(j);
   }
   }
+  for(int i = shooter.size()-1; i>=0; i--){
+    shooter.get(i).move();
+    shooter.get(i).show();
+    for(int m = gooner.size()-1; m >= 0; m--){
+    if(dist((float)(shooter.get(i).myCenterX), (float)(shooter.get(i).myCenterY), (float)(gooner.get(m).myCenterX), (float)(gooner.get(m).myCenterY)) <=15){
+      gooner.remove(m);
+      shooter.remove(i);
+      break;
+     }
+    }
+  }
 }
  //write key pressed here
  public void keyPressed()
@@ -88,6 +102,9 @@ public void draw()
    goon.setmyCenterX((int)(Math.random()*500));
    goon.setmyCenterY((int)(Math.random()*500));
   }
+ else if (key == 'f'){
+   shooter.add(new Bullet(goon));
+  }
  }
 
 void keyReleased()
@@ -108,5 +125,5 @@ void keyReleased()
   {
     dIsPressed = false;
   }
- 
+
 }
