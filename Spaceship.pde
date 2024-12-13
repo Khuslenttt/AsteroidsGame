@@ -30,7 +30,10 @@ public void setmyCenterY(int y)
 {
   myCenterY = y;
 }
- 
-  
- 
+
+  public double getX() {return myCenterX;}
+  public double getY() {return myCenterY;}
+  public double getPointDirection(){return myPointDirection;}
+  public double getmySpeedX(){return myXspeed;}
+  public double getmySpeedY(){return myYspeed;}
 }
